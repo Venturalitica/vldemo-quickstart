@@ -1,0 +1,17 @@
+apiVersion: venturalitica.ai/v1alpha1
+kind: AISystem
+
+# ── 1. Identidad y finalidad ─────────────────────────────────────────────────
+system:
+  name: quickstart-education
+  intended_purpose: "Predicción de aprobado/suspenso de estudiantes de secundaria a partir de factores escolares (ejemplo mínimo open-core)."
+  organization: quickstart
+  version: "1.0.0"
+  decisions: [predicted_pass, predicted_fail]
+  affected_persons: [estudiantes]
+  component_type: ai-model
+  potential_misuses:
+    - id: mu.enrollment-without-review
+      description: "Usar la predicción para decisiones de matrícula/itinerario sin revisión humana."
+      addressed_by: [risk.unfair-prediction]
+
