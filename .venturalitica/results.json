@@ -1,0 +1,61 @@
+[
+  {
+    "control_id": "fairness-parity",
+    "description": "Predicci\u00f3n injusta entre grupos demogr\u00e1ficos \u2014 demographic_parity_diff",
+    "metric_key": "demographic_parity_diff",
+    "threshold": 0.15,
+    "actual_value": 0.05476141505553278,
+    "operator": "lt",
+    "passed": true,
+    "severity": "high",
+    "metadata": {
+      "severity": "high",
+      "enforcement_mode": "block",
+      "evaluation_method": "automated",
+      "lifecycle_phase": "validation",
+      "risk_id": "risk.unfair-prediction"
+    },
+    "power": {
+      "n": 395,
+      "n_clusters": null,
+      "groups": {
+        "0": 208,
+        "1": 187
+      },
+      "ci_low": 0.0029420350350126442,
+      "ci_high": 0.1421114977076459,
+      "ci_level": 0.95,
+      "method": "bootstrap",
+      "n_boot": 1000,
+      "seed": 42
+    }
+  },
+  {
+    "control_id": "accuracy-floor",
+    "description": "Predicci\u00f3n injusta entre grupos demogr\u00e1ficos \u2014 accuracy_score",
+    "metric_key": "accuracy_score",
+    "threshold": 0.65,
+    "actual_value": 0.7569620253164557,
+    "operator": "gt",
+    "passed": true,
+    "severity": "medium",
+    "metadata": {
+      "severity": "medium",
+      "enforcement_mode": "warn",
+      "evaluation_method": "automated",
+      "lifecycle_phase": "validation",
+      "risk_id": "risk.unfair-prediction"
+    },
+    "power": {
+      "n": 395,
+      "n_clusters": null,
+      "groups": {},
+      "ci_low": 0.7164556962025317,
+      "ci_high": 0.7974683544303798,
+      "ci_level": 0.95,
+      "method": "bootstrap",
+      "n_boot": 1000,
+      "seed": 42
+    }
+  }
+]
