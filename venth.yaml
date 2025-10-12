@@ -1,0 +1,93 @@
+apiVersion: venturalitica.ai/v1alpha1
+kind: AISystem
+
+# ── 1. Identidad y finalidad ─────────────────────────────────────────────────
+system:
+  name: quickstart-education
+  intended_purpose: "Predicción de aprobado/suspenso de estudiantes de secundaria a partir de factores escolares (ejemplo mínimo open-core)."
+  organization: quickstart
+  version: "1.0.0"
+  decisions: [predicted_pass, predicted_fail]
+  affected_persons: [estudiantes]
+  component_type: ai-model
+  potential_misuses:
+    - id: mu.enrollment-without-review
+      description: "Usar la predicción para decisiones de matrícula/itinerario sin revisión humana."
+      addressed_by: [risk.unfair-prediction]
+
+# ── 2. Tarea ─────────────────────────────────────────────────────────────────
+task:
+  modality: tabular
+  type: classification
+
+# ── 3. Marco regulatorio — SOLO el escalón GRATIS (ISO 23894) ────────────────
+# scope: clasificación educativa (EU AI Act Anexo III §3) — alto riesgo. El usuario GRATIS
+#        gobierna el ciclo RDD y se autocomprueba contra ISO 23894 (buena práctica). La
+#        presunción prEN 18228 + sectoriales + Anexo IV son el escalón de PAGO (no se declaran).
+context:
+  applicable_standards:
+    - iso/23894@2023
+
+# ── 4. Datos y modelo ────────────────────────────────────────────────────────
+dataset: { croissant: data/student.croissant.json }
+artifacts:
+  model: { kind: logreg, seed: 42 }
+
+# ── 5. Medición y reproducción ───────────────────────────────────────────────
+eval: { script: train.py }
+pipeline: { tool: dvc, metrics: metrics.json }
+oscal: { assessment_plan: shared_data/policies/assessment_plan.oscal.yaml }
+
+# ── 5b. Evaluación declarada por humano (F5) ─────────────────────────────────
+classification:
+  tier: high
+  basis:
+    - "EU AI Act Annex III §3 (educación y formación profesional)"
+  rationale: |
+    Predicción de aprobado/suspenso de estudiantes de secundaria: sistema de IA de
+    alto riesgo (decisiones que afectan al acceso a la educación y a itinerarios
+    formativos de personas físicas, Anexo III §3).
+
+# ── 6. Programa de riesgos (ISO 23894) — mínimo: 1 riesgo, 2 measures ────────
+risk:
+  appetite: { individual: MEDIUM, society: MEDIUM, organization: MEDIUM }
+  criteria: { scale: "5x5" }
+  overall_residual_criterion: MEDIUM
+  review_interval: P1Y
+  risks:
+    - id: risk.unfair-prediction
+      title: "Predicción injusta entre grupos demográficos"
+      domain: fairness
+      rationale: "El modelo puede predecir resultados de forma desigual entre grupos (p.ej. por sexo), reproduciendo desventajas educativas históricas."
+      impact: { individual: MEDIUM, society: MEDIUM }
+      likelihood: POSSIBLE
+      treat:
+        - method: REDUCE
+          action: "Acotar la paridad demográfica de la predicción por sexo y mantener una exactitud mínima defendible."
+          controls: [eu/ai-act@2024#art-15]
+          residual_likelihood: UNLIKELY
+          measures:
+            - id: fairness-parity
+              metric: demographic_parity_diff
+              constraint: "< 0.15"   # calibrado: modelo real mide 0.0548 (IC 95% [0.003–0.142], n=395, seed=42)
+              severity: high
+              enforcement: gate
+              lifecycle: [validation]
+              article: "15"
+              # M-23: una medición de paridad residual evidencia SOLO la EVALUACIÓN del riesgo (6.4.4)
+              # y su TRATAMIENTO/verificación con la puerta (6.5) — NO la identificación (6.4.2) ni el
+              # análisis (6.4.3), que son fases previas que un residual no demuestra. Citas recortadas (4→2).
+              standard_clauses:
+                - "iso/23894@2023#6.4.4"
+                - "iso/23894@2023#6.5"
+              inputs: { prediction: prediction, dimension: gender }
+            - id: accuracy-floor
+              metric: accuracy_score
+              constraint: "> 0.65"   # calibrado: modelo real mide 0.757 (IC 95% [0.716–0.797], n=395, seed=42)
+              severity: medium
+              enforcement: audit
+              lifecycle: [validation]
+              article: "15"
+              standard_clauses: ["iso/23894@2023#6.5"]
+              inputs: { prediction: prediction }
+  applicability: {}
