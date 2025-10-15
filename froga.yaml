@@ -15,3 +15,16 @@ system:
       description: "Usar la predicción para decisiones de matrícula/itinerario sin revisión humana."
       addressed_by: [risk.unfair-prediction]
 
+# ── 2. Tarea ─────────────────────────────────────────────────────────────────
+task:
+  modality: tabular
+  type: classification
+
+# ── 3. Marco regulatorio — SOLO el escalón GRATIS (ISO 23894) ────────────────
+# scope: clasificación educativa (EU AI Act Anexo III §3) — alto riesgo. El usuario GRATIS
+#        gobierna el ciclo RDD y se autocomprueba contra ISO 23894 (buena práctica). La
+#        presunción prEN 18228 + sectoriales + Anexo IV son el escalón de PAGO (no se declaran).
+context:
+  applicable_standards:
+    - iso/23894@2023
+
