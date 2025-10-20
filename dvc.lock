@@ -1,0 +1,62 @@
+schema: '2.0'
+stages:
+  featurize:
+    cmd: .venv/bin/python featurize.py
+    deps:
+    - path: data/student-mat.csv
+      hash: md5
+      md5: 4dc304be95c60de6ee13fb8769469dd7
+      size: 56993
+      isexec: true
+    - path: data/student.croissant.json
+      hash: md5
+      md5: 3905c2c6cb55f1eed7403c1cb82ec463
+      size: 13668
+    - path: featurize.py
+      hash: md5
+      md5: ed60ecda7754e88d439f0400f0c1fef1
+      size: 1054
+    outs:
+    - path: data/features.parquet
+      hash: md5
+      md5: b484000a44475dba4690693de374b66a
+      size: 21055
+  evaluate:
+    cmd: .venv/bin/python evaluate.py
+    deps:
+    - path: compliance_eval.py
+      hash: md5
+      md5: fd451b7333c1ce9d1221bf0fea66cd9f
+      size: 10932
+    - path: data/features.parquet
+      hash: md5
+      md5: b484000a44475dba4690693de374b66a
+      size: 21055
+    - path: evaluate.py
+      hash: md5
+      md5: 0ca958998ee56130346fc5007a32f02f
+      size: 817
+    - path: shared_data/policies/assessment_plan.oscal.yaml
+      hash: md5
+      md5: 106a9094f9a3e2140df5cc6868a45ec7
+      size: 2758
+    - path: train.py
+      hash: md5
+      md5: e4f312ac964821e9f177c43942b3f7ec
+      size: 1157
+    params:
+      params.yaml:
+        seed: 42
+    outs:
+    - path: .venturalitica/bom.json
+      hash: md5
+      md5: 7cfea04db73c90ef28da8f747241e9f0
+      size: 113653
+    - path: metrics.json
+      hash: md5
+      md5: 6925706d38a940a56d721feaf68f12f3
+      size: 725
+    - path: model.pkl
+      hash: md5
+      md5: 29c3b74a4e657b69c57161c55dd8f377
+      size: 4033
