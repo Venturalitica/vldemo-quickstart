@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "reconstruct",
+  "system": "quickstart-education",
+  "payload": {
+    "system_name": "quickstart-education",
+    "snapshots": [
+      {
+        "sha": "054850b56305fc0b4196442cde0346cd21a6ba52",
+        "date": "2025-10-20T19:34:52+00:00",
+        "subject": "run: V1 evidencia (gate GREEN esperado; seed=42)"
+      }
+    ],
+    "risks": [
+      {
+        "risk_id": "risk.unfair-prediction",
+        "identified_sha": "3420b2f87f3bb71b6cb6cc16435a4a9e18d758a6",
+        "identified_date": "2025-10-20T19:34:52Z",
+        "provenance": "declared",
+        "assessment": {
+          "risk_id": "risk.unfair-prediction",
+          "kind": "threat",
+          "provenance": "declared",
+          "likelihood": "POSSIBLE",
+          "residual_declared_likelihood": "UNLIKELY",
+          "dimensions": [
+            {
+              "dimension": "individual",
+              "impact": "MEDIUM",
+              "appetite": "MEDIUM",
+              "inherent_level": "MEDIUM",
+              "inherent_eval": "within",
+              "residual_level": "LOW",
+              "residual_eval": "within"
+            },
+            {
+              "dimension": "society",
+              "impact": "MEDIUM",
+              "appetite": "MEDIUM",
+              "inherent_level": "MEDIUM",
+              "inherent_eval": "within",
+              "residual_level": "LOW",
+              "residual_eval": "within"
+            }
+          ],
+          "inherent_overall": "MEDIUM",
+          "residual_overall": "LOW",
+          "requires_treatment": false,
+          "control_confirmed": true,
+          "cycle": {
+            "status": "closed"
+          },
+          "priority": 1
+        }
+      }
+    ],
+    "approval": null,
+    "lifecycle": {
+      "state": "draft"
+    }
+  }
+}
