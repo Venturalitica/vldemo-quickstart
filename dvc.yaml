@@ -1,0 +1,29 @@
+# Pipeline reproducible del quickstart (DVC). DAG: featurize → evaluate. El motor lo reproduce
+# vía el seam Reproducer (`dvc repro`) y ancla `dvc.lock` en la evidencia firmada.
+stages:
+  featurize:
+    cmd: .venv/bin/python featurize.py
+    deps:
+      - featurize.py
+      - data/student-mat.csv
+      - data/student.croissant.json
+    outs:
+      - data/features.parquet
+  evaluate:
+    cmd: .venv/bin/python evaluate.py
+    deps:
+      - evaluate.py
+      - compliance_eval.py
+      - train.py
+      - data/features.parquet
+      - shared_data/policies/assessment_plan.oscal.yaml
+    params:
+      - seed
+    outs:
+      - model.pkl:
+          cache: true
+      - .venturalitica/bom.json:
+          cache: false
+    metrics:
+      - metrics.json:
+          cache: false

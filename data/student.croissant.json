@@ -1,0 +1,542 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "name": "student-performance",
+  "description": "UCI Student Performance (secondary school, Math). Predicts pass/fail (G3>=10) for an EU AI Act Annex III §3 (education) high-risk example.",
+  "citeAs": "P. Cortez and A. Silva, FUBUTEC 2008.",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://archive.ics.uci.edu/dataset/320/student+performance",
+  "datePublished": "2008-01-01",
+  "version": "1.0.0",
+  "rai:dataBiases": "Real secondary-school data; the protected attribute sex is examined for demographic parity in outcomes.",
+  "rai:sensitiveData": "Contains demographic attributes (sex, age, family background).",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "student-mat.csv",
+      "name": "student-mat.csv",
+      "contentUrl": "data/student-mat.csv",
+      "encodingFormat": "text/csv",
+      "separator": ";",
+      "sha256": "e47f9ee225e1ee6e69b7564e6dac7123e80b8486677fe111f351964cef5dec80"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "students",
+      "name": "students",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "students/school",
+          "name": "school",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "school"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/sex",
+          "name": "sex",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "sex"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/age",
+          "name": "age",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "age"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/address",
+          "name": "address",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "address"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/famsize",
+          "name": "famsize",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "famsize"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Pstatus",
+          "name": "Pstatus",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Pstatus"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Medu",
+          "name": "Medu",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Medu"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Fedu",
+          "name": "Fedu",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Fedu"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Mjob",
+          "name": "Mjob",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Mjob"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Fjob",
+          "name": "Fjob",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Fjob"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/reason",
+          "name": "reason",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "reason"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/guardian",
+          "name": "guardian",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "guardian"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/traveltime",
+          "name": "traveltime",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "traveltime"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/studytime",
+          "name": "studytime",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "studytime"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/failures",
+          "name": "failures",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "failures"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/schoolsup",
+          "name": "schoolsup",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "schoolsup"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/famsup",
+          "name": "famsup",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "famsup"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/paid",
+          "name": "paid",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "paid"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/activities",
+          "name": "activities",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "activities"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/nursery",
+          "name": "nursery",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "nursery"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/higher",
+          "name": "higher",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "higher"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/internet",
+          "name": "internet",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "internet"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/romantic",
+          "name": "romantic",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "romantic"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/famrel",
+          "name": "famrel",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "famrel"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/freetime",
+          "name": "freetime",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "freetime"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/goout",
+          "name": "goout",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "goout"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Dalc",
+          "name": "Dalc",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Dalc"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/Walc",
+          "name": "Walc",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "Walc"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/health",
+          "name": "health",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "health"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/absences",
+          "name": "absences",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "absences"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/G1",
+          "name": "G1",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "G1"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/G2",
+          "name": "G2",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "G2"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "students/G3",
+          "name": "G3",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileObject": {
+              "@id": "student-mat.csv"
+            },
+            "extract": {
+              "column": "G3"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
