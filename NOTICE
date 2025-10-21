@@ -1,0 +1,7 @@
+Dataset: Student Performance (student-mat.csv)
+Source: UCI Machine Learning Repository — https://archive.ics.uci.edu/dataset/320/student+performance
+Citation: P. Cortez and A. Silva. "Using Data Mining to Predict Secondary School Student
+  Performance." In A. Brito and J. Teixeira (eds.), Proceedings of 5th FUture BUsiness
+  TEChnology Conference (FUBUTEC 2008), pp. 5-12, Porto, Portugal, April 2008. EUROSIS.
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+Redistributed unmodified for the venth `quickstart` open-core example.

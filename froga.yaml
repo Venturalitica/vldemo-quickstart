@@ -28,3 +28,8 @@ context:
   applicable_standards:
     - iso/23894@2023
 
+# ── 4. Datos y modelo ────────────────────────────────────────────────────────
+dataset: { croissant: data/student.croissant.json }
+artifacts:
+  model: { kind: logreg, seed: 42 }
+
