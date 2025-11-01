@@ -33,3 +33,70 @@ dataset: { croissant: data/student.croissant.json }
 artifacts:
   model: { kind: logreg, seed: 42 }
 
+# ── 5. Medición y reproducción ───────────────────────────────────────────────
+eval: { script: train.py }
+pipeline: { tool: dvc, metrics: metrics.json }
+oscal: { assessment_plan: shared_data/policies/assessment_plan.oscal.yaml }
+
+# ── 5b. Evaluación declarada por humano (F5) ─────────────────────────────────
+classification:
+  tier: high
+  basis:
+    - "EU AI Act Annex III §3 (educación y formación profesional)"
+  rationale: |
+    Predicción de aprobado/suspenso de estudiantes de secundaria: sistema de IA de
+    alto riesgo (decisiones que afectan al acceso a la educación y a itinerarios
+    formativos de personas físicas, Anexo III §3).
+
+# ── 6. Programa de riesgos (ISO 23894) — mínimo: 1 riesgo, 2 measures ────────
+risk:
+  appetite: { individual: MEDIUM, society: MEDIUM, organization: MEDIUM }
+  criteria: { scale: "5x5" }
+  overall_residual_criterion: MEDIUM
+  review_interval: P1Y
+  risks:
+    - id: risk.unfair-prediction
+      title: "Predicción injusta entre grupos demográficos"
+      domain: fairness
+      rationale: "El modelo puede predecir resultados de forma desigual entre grupos (p.ej. por sexo), reproduciendo desventajas educativas históricas."
+      impact: { individual: MEDIUM, society: MEDIUM }
+      likelihood: POSSIBLE
+      treat:
+        - method: REDUCE
+          action: "Acotar la paridad demográfica de la predicción por sexo y mantener una exactitud mínima defendible."
+          controls: [eu/ai-act@2024#art-15]
+          residual_likelihood: UNLIKELY
+          measures:
+            - id: fairness-parity
+              metric: demographic_parity_diff
+              constraint: "< 0.15"   # calibrado: modelo real mide 0.0548 (IC 95% [0.003–0.142], n=395, seed=42)
+              severity: high
+              enforcement: gate
+              lifecycle: [validation]
+              article: "15"
+              # M-23: una medición de paridad residual evidencia SOLO la EVALUACIÓN del riesgo (6.4.4)
+              # y su TRATAMIENTO/verificación con la puerta (6.5) — NO la identificación (6.4.2) ni el
+              # análisis (6.4.3), que son fases previas que un residual no demuestra. Citas recortadas (4→2).
+              standard_clauses:
+                - "iso/23894@2023#6.4.4"
+                - "iso/23894@2023#6.5"
+              inputs: { prediction: prediction, dimension: gender }
+            - id: accuracy-floor
+              metric: accuracy_score
+              constraint: "> 0.65"   # calibrado: modelo real mide 0.757 (IC 95% [0.716–0.797], n=395, seed=42)
+              severity: medium
+              enforcement: audit
+              lifecycle: [validation]
+              article: "15"
+              standard_clauses: ["iso/23894@2023#6.5"]
+              inputs: { prediction: prediction }
+  applicability: {}
+
+# ── Rol AI Act per-sistema (F8d) ─────────────────────────────────────────────
+# EduAtlante actúa como PROVEEDOR (Art. 3(3)): construye y pone en el mercado el
+# sistema de selección educativa (open-core, escalón gratuito ISO 23894). Alto
+# riesgo Anexo III §3.
+roles:
+  - role: provider
+    since: "2026-06-24"
+    market_phase: placed_on_market
