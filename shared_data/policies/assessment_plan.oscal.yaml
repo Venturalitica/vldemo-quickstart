@@ -1,0 +1,78 @@
+# GENERADO por `froga compile` desde quickstart-education.yaml — NO editar a mano.
+# Fuente de verdad = el AssuranceProgram (capa Art.9). Las measures post-market
+# (lifecycle monitoring/production) se omiten del assessment-plan ex-ante.
+---
+component-definition:
+  uuid: 1b1444c0-78d3-5c42-b2ca-1f0865d58d49
+  metadata:
+    title: Assessment plan (compilado de AssuranceProgram 'quickstart-education')
+    version: 1.0.0
+    oscal-version: 1.2.2
+  components:
+  - uuid: 05abcce3-a8b1-5e10-ae97-5d6d8cc4c94f
+    type: software
+    title: quickstart-education (assurance)
+    description: Controles ex-ante compilados desde el AssuranceProgram (Art.9 → contrato del gate).
+    control-implementations:
+    - uuid: a735f2ee-770f-553f-b050-00b8f1a4db73
+      source: '#vl-ai-assurance-profile-2026'
+      description: 'Generado por `froga compile`. NO editar a mano: la fuente es el AssuranceProgram.'
+      implemented-requirements:
+      - uuid: 1e3f547d-99b3-5d2e-9081-fad8c13f8ef8
+        control-id: fairness-parity
+        description: Predicción injusta entre grupos demográficos — demographic_parity_diff
+        props:
+        - name: metric_key
+          value: demographic_parity_diff
+        - name: operator
+          value: lt
+        - name: threshold
+          value: '0.15'
+        - name: severity
+          value: high
+        - name: enforcement_mode
+          value: block
+        - name: evaluation_method
+          value: automated
+        - name: lifecycle_phase
+          value: validation
+        - name: risk_id
+          value: risk.unfair-prediction
+        - name: control_tier
+          value: protective
+        - name: article
+          value: '15'
+        - name: standard_clauses
+          value: iso/23894@2023#6.4.4,iso/23894@2023#6.5
+        - name: input.dimension
+          value: gender
+        - name: input.prediction
+          value: prediction
+      - uuid: b79043f3-a768-5721-b117-4c3f4024ccc5
+        control-id: accuracy-floor
+        description: Predicción injusta entre grupos demográficos — accuracy_score
+        props:
+        - name: metric_key
+          value: accuracy_score
+        - name: operator
+          value: gt
+        - name: threshold
+          value: '0.65'
+        - name: severity
+          value: medium
+        - name: enforcement_mode
+          value: warn
+        - name: evaluation_method
+          value: automated
+        - name: lifecycle_phase
+          value: validation
+        - name: risk_id
+          value: risk.unfair-prediction
+        - name: control_tier
+          value: protective
+        - name: article
+          value: '15'
+        - name: standard_clauses
+          value: iso/23894@2023#6.5
+        - name: input.prediction
+          value: prediction
