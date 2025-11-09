@@ -1,0 +1,35 @@
+{
+  "fairness-parity": {
+    "value": 0.05476141505553278,
+    "power": {
+      "n": 395,
+      "n_clusters": null,
+      "groups": {
+        "0": 208,
+        "1": 187
+      },
+      "ci_low": 0.0029420350350126442,
+      "ci_high": 0.1421114977076459,
+      "ci_level": 0.95,
+      "method": "bootstrap",
+      "n_boot": 1000,
+      "seed": 42
+    }
+  },
+  "accuracy-floor": {
+    "value": 0.7569620253164557,
+    "power": {
+      "n": 395,
+      "n_clusters": null,
+      "groups": {},
+      "ci_low": 0.7164556962025317,
+      "ci_high": 0.7974683544303798,
+      "ci_level": 0.95,
+      "method": "bootstrap",
+      "n_boot": 1000,
+      "seed": 42
+    }
+  },
+  "robustness-stability": 1.0,
+  "artifact-integrity": 1.0
+}
