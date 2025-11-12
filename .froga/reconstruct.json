@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "reconstruct",
+  "system": "quickstart-education",
+  "payload": {
+    "system_name": "quickstart-education",
+    "snapshots": [
+      {
+        "sha": "a87cdcf32747d57647e850a0c7834387f8d76a9a",
+        "date": "2025-11-09T14:45:59+00:00",
+        "subject": "run: autochequeo ISO 23894 (gate VERDE; seed=42)"
+      }
+    ],
+    "risks": [
+      {
+        "risk_id": "risk.unfair-prediction",
+        "identified_sha": "f869138bf80d6dafdbaa583763beb61fb616bf30",
+        "identified_date": "2025-10-11T14:45:58Z",
+        "provenance": "declared",
+        "assessment": {
+          "risk_id": "risk.unfair-prediction",
+          "kind": "threat",
+          "provenance": "declared",
+          "likelihood": "POSSIBLE",
+          "residual_declared_likelihood": "UNLIKELY",
+          "dimensions": [
+            {
+              "dimension": "individual",
+              "impact": "MEDIUM",
+              "appetite": "MEDIUM",
+              "inherent_level": "MEDIUM",
+              "inherent_eval": "within",
+              "residual_level": "LOW",
+              "residual_eval": "within"
+            },
+            {
+              "dimension": "society",
+              "impact": "MEDIUM",
+              "appetite": "MEDIUM",
+              "inherent_level": "MEDIUM",
+              "inherent_eval": "within",
+              "residual_level": "LOW",
+              "residual_eval": "within"
+            }
+          ],
+          "inherent_overall": "MEDIUM",
+          "residual_overall": "LOW",
+          "requires_treatment": false,
+          "control_confirmed": true,
+          "cycle": {
+            "status": "closed"
+          },
+          "priority": 1
+        }
+      }
+    ],
+    "approval": null,
+    "lifecycle": {
+      "state": "draft"
+    }
+  }
+}
